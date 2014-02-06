@@ -1,0 +1,29 @@
+OASISFormat: 0.4
+Name:        json-benchmarks
+Version:     0.0.1
+Synopsis:    Json benchmarks of Yojson vs Ezjsonm
+Authors:     Rudi Grinberg
+License:     MIT
+BuildTools: ocamlbuild
+
+Library bench_common
+  Path:            lib
+  BuildTools:      ocamlbuild
+  Modules:         Random_data
+  BuildDepends: threads, core, ezjsonm, yojson
+
+Executable bench_read
+  Path:               lib
+  MainIs:             bench_read.ml
+  Custom:             true
+  CompiledObject:     best
+  Install:            false
+  BuildDepends:       bench_common, core_bench
+
+Executable bench_write
+  Path:               lib
+  MainIs:             bench_write.ml
+  Custom:             true
+  CompiledObject:     best
+  Install:            false
+  BuildDepends:       bench_common, core_bench

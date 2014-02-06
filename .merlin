@@ -1,0 +1,7 @@
+S lib
+B _build
+B _build/lib
+PKG core
+PKG ezjsonm
+PKG yojson
+PKG core_bench
