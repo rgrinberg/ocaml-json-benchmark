@@ -12,7 +12,7 @@ let () =
                      |> List.map ~f:Random_data.Ez.to_json) in
       json |> Ezjsonm.to_string |> ignore
     );
-    Bench.Test.create ~name:"yojson read to string" (fun () ->
+    Bench.Test.create ~name:"yojson write to string" (fun () ->
       let json = `List (random_events
                         |> List.map ~f:Random_data.Yo.to_json) in
       ignore @@ Yojson.Basic.to_string json
