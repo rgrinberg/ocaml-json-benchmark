@@ -1,5 +1,4 @@
 open Core.Std
-(* this is the simple record we will be using to benchmark the json libs *)
 
 module Event_type = struct
   type t =
@@ -26,6 +25,8 @@ module Event_type = struct
     | _ -> assert false
 end
 
+(* this is the simple record we will be using to benchmark the json libs *)
+
 type event = {
   username: string;
   date: int;
@@ -38,10 +39,14 @@ let random_string length =
     let rnd = Random.int 34 in
     Char.of_int_exn (rnd + 65))
 
-module Ez : sig
-  val to_json : event -> Ezjsonm.t
-  val of_json : Ezjsonm.t -> event
-end = struct
+module type Json_intf = sig
+  type json
+  val to_json : event -> json
+  val of_json : json -> event
+end
+
+module Ez : sig include Json_intf with type json := Ezjsonm.t end =
+struct
   open Ezjsonm
   let to_json { username; date; event_type; payload } =
     dict [
@@ -62,10 +67,8 @@ end = struct
     | _ -> assert false
 end
 
-module Yo : sig
-  val to_json : event -> Yojson.Basic.json
-  val of_json : Yojson.Basic.json -> event
-end = struct
+module Yo : sig include Json_intf with type json := Yojson.Basic.json end =
+struct
   open Yojson.Basic
   let to_json { username; date; event_type; payload } =
     `Assoc [
