@@ -11,15 +11,15 @@ let random_json =
 let () =
   Command.run @@
   Bench.make_command [
-    Bench.Test.create ~name:"ezjsonm read raw" (fun () ->
-      random_json |> Ezjsonm.from_string |> ignore
-    );
-    Bench.Test.create ~name:"yojson read raw basic" (fun () ->
-      random_json |> Yojson.Basic.from_string |> ignore
-    );
-    Bench.Test.create ~name:"yojson read raw safe" (fun () ->
-      random_json |> Yojson.Safe.from_string |> ignore
-    );
+    (* Bench.Test.create ~name:"ezjsonm read raw" (fun () -> *)
+    (*   random_json |> Ezjsonm.from_string |> ignore *)
+    (* ); *)
+    (* Bench.Test.create ~name:"yojson read raw basic" (fun () -> *)
+    (*   random_json |> Yojson.Basic.from_string |> ignore *)
+    (* ); *)
+    (* Bench.Test.create ~name:"yojson read raw safe" (fun () -> *)
+    (*   random_json |> Yojson.Safe.from_string |> ignore *)
+    (* ); *)
     Bench.Test.create ~name:"ezjsonm read" (fun () ->
       random_json
       |> Ezjsonm.from_string
