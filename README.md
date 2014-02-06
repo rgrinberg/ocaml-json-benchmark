@@ -1,5 +1,7 @@
-Benchmarks of OCaml Json Reading/Writing
-========================================
+Benchmarking OCaml Json Implementations
+--------------------------------
+
+To run:
 
 ```
 oasis setup
