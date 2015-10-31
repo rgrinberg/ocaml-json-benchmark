@@ -45,7 +45,7 @@ module type Json_intf = sig
   val of_json : json -> event
 end
 
-module Ez : sig include Json_intf with type json := Ezjsonm.t end =
+module Ez : sig include Json_intf with type json := Ezjsonm.value end =
 struct
   open Ezjsonm
   let to_json { username; date; event_type; payload } =
@@ -99,4 +99,7 @@ let random_event () =
 
 let random_event_json () =
   let event = random_event () in
-  event |> Ez.to_json |> Ezjsonm.to_string
+  event 
+  |> Ez.to_json 
+  |> Ezjsonm.wrap
+  |> Ezjsonm.to_string
