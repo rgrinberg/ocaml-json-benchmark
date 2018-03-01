@@ -12,6 +12,6 @@ ocaml setup.ml -all
 
 My results are available at my blog:
 
-<http://rgrinberg.com/blog/2014/02/05/ocaml-json-benchmark/>
+<http://rgrinberg.com/posts/ocaml-json-benchmark/>
 
 TL;DR: yojson is faster
