@@ -1,0 +1,19 @@
+{
+  "esy": {
+    "build": "dune build @all --profile=release"
+  },
+  "scripts": {
+    "bench:read": "esy dune exec -- ./src/bench_read.exe",
+    "bench:write": "esy dune exec -- ./src/bench_write.exe",
+    "format": "esy dune build @fmt --auto-promote"
+  },
+  "dependencies": {
+    "@opam/core": "v0.11.3",
+    "@opam/core_bench": "v0.11.0",
+    "@opam/dune": "1.8.2",
+    "@opam/ezjsonm": "1.0.0",
+    "@opam/yojson": "1.7.0",
+    "ocaml": "^4.7.1004"
+  },
+  "devDependencies": { "@opam/merlin": "*", "@opam/ocamlformat": "*" }
+}
