@@ -98,6 +98,40 @@ end = struct
     | _ -> assert false
 end
 
+module Jaf : sig
+  include Json_intf with type json := Jsonaf.t
+end = struct
+
+  let extract_string = function
+    | `String s -> s
+    | `Number n -> n
+    | _ -> assert false
+
+  let to_json {username; date; event_type; payload} =
+    `Object
+      [ ("username", `String username)
+      ; ("date", `Number (Int.to_string date))
+      ; ("event_type", `String (Event_type.to_string event_type))
+      ; ("payload", `String payload) ]
+
+  let of_json : Jsonaf.t -> event = function
+    | `Object obj ->
+        { username=
+            extract_string
+            @@ List.Assoc.find_exn obj ~equal:String.equal "username"
+        ; date=
+            Int.of_string
+              ( extract_string
+              @@ List.Assoc.find_exn obj ~equal:String.equal "date" )
+        ; event_type=
+            Event_type.of_string @@ extract_string
+            @@ List.Assoc.find_exn obj ~equal:String.equal "event_type"
+        ; payload=
+            extract_string
+            @@ List.Assoc.find_exn obj ~equal:String.equal "payload" }
+    | _ -> assert false
+end
+
 let random_event () =
   { username= random_string 10
   ; date= Random.int 100000

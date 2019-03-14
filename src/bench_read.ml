@@ -33,4 +33,15 @@ let () =
                |> Yojson.Basic.Util.to_list
                |> List.map ~f:Random_data.Yo.of_json
              in
+             ignore event_list )
+       ; Bench.Test.create ~name:"jsonaf read" (fun () ->
+             let extract_array = function
+               | `Array t -> t
+               | _ -> failwith "invalid input"
+             in
+             let event_list : Random_data.event list =
+               List.map ~f:Random_data.Jaf.of_json
+                 (extract_array
+                    (Result.ok_or_failwith (Jsonaf.of_string random_json)))
+             in
              ignore event_list ) ]

@@ -1,19 +1,24 @@
 {
-  "esy": {
-    "build": "dune build @all --profile=release"
-  },
+  "esy": { "build": "dune build @all --profile=release" },
   "scripts": {
     "bench:read": "esy dune exec -- ./src/bench_read.exe",
     "bench:write": "esy dune exec -- ./src/bench_write.exe",
     "format": "esy dune build @fmt --auto-promote"
   },
   "dependencies": {
+    "@opam/angstrom": "0.11.1",
     "@opam/core": "v0.11.3",
     "@opam/core_bench": "v0.11.0",
     "@opam/dune": "1.8.2",
     "@opam/ezjsonm": "1.0.0",
+    "@opam/faraday": "0.7.0",
+    "@opam/jsonaf": "*",
     "@opam/yojson": "1.7.0",
     "ocaml": "^4.7.1004"
+  },
+  "resolutions": {
+    "@opam/jsonaf":
+      "inhabitedtype/jsonaf:jsonaf.opam#d55286622f0d1b650eb3c5cee4a6197346e3ed04"
   },
   "devDependencies": { "@opam/merlin": "*", "@opam/ocamlformat": "*" }
 }

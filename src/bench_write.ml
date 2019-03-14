@@ -15,4 +15,9 @@ let () =
              let json =
                `List (random_events |> List.map ~f:Random_data.Yo.to_json)
              in
-             ignore @@ Yojson.Basic.to_string json ) ]
+             ignore @@ Yojson.Basic.to_string json )
+       ; Bench.Test.create ~name:"Jsonaf write to string" (fun () ->
+             let json =
+               `Array (random_events |> List.map ~f:Random_data.Jaf.to_json)
+             in
+             ignore @@ Jsonaf.to_string json ) ]
