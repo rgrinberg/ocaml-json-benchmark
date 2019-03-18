@@ -12,3 +12,5 @@ setup.ml
 META
 _tags
 TAGS
+*.merlin
+_esy
